@@ -5,71 +5,67 @@ import './index.css';
 class TextBox extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      value: '',
-    };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleChange(event) {
-    debugger;
-    this.setState({
-      value: event.target.value,
-    });
   }
 
   render() {
     return (
         <label>
-          To:
-          <input type="text" value={this.state.to_email} onChange={this.handleChange} />
+          {this.props.name}
+          <input type="text" value={this.props.value} onChange={(e) => {this.props.onChange(e, this.props.name)}} />
         </label>
     );
   }
 }
 
+class TextArea extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
+        <label>
+          {this.props.name}
+          <textarea rows={5} value={this.props.text} onChange={(e) => {this.props.onChange(e, this.props.name)}} />
+        </label>
+    );
+  }
+}
+
+
 class EmailForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: '',
+      to_email: '',
+      subject: '',
+      text: '',
+      from_email: '',
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(event) {
-    debugger;
+  handleChange(event, f) {
     this.setState({
-      value: event.target.value,
+     ...this.state,
+     [f]: event.target.value
     });
   }
 
   handleSubmit(event) {
-    alert('An essay was submitted: ' + this.state.subject);
+    alert('An essay was submitted: ' + this.state.to_email + ' ' + this.state.subject+ ' ' +this.state.text+ ' ' +this.state.from_email);
     event.preventDefault();
   }
 
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <label>
-          To:
-          <input type="text" value={this.state.to_email} onChange={this.handleChange} />
-        </label>
-
-        <label>
-          Subject:
-          <input type="text" value={this.state.subject} onChange={this.handleChange} />
-        </label>
-
-        <label>
-          Text:
-          <textarea value={this.state.text} onChange={this.handleChange} />
-        </label>
+        <TextBox name={'to_email'} value={this.state.to_email} onChange={(e, f) => {this.handleChange(e, f)}}/> <br/>
+        <TextBox name={'subject'} value={this.state.subject} onChange={(e, f) => {this.handleChange(e, f)}}/> <br/>
+        <TextArea name={'text'} value={this.state.text} onChange={(e, f) => {this.handleChange(e, f)}}/> <br/>
+        <TextBox name={'from_email'} value={this.state.from_email} onChange={(e, f) => {this.handleChange(e, f)}}/> <br/>
         <input type="submit" value="Submit" />
       </form>
     );
