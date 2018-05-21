@@ -56,33 +56,70 @@ class EmailForm extends React.Component {
 
   handleSubmit(event) {
     // alert('An essay was submitted: ' + this.state.to_email + ' ' + this.state.subject+ ' ' +this.state.text+ ' ' +this.state.from_email);
-    let uri = "https://api.cca.scale360.net/api/v1/auth/customer_request/create"
-    this.callApi(uri, this.state)
+    this.callApi(this.state)
     event.preventDefault();
   }
 
-  callApi(uri, state) {
-    let fetchData = {
-        method: 'POST',
-        headers: {
-            'Authorization':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiMjM1YWZiYzItOWQ1MC00NTY0LTlmNTgtMDlkZmRlMzA2MTJkIiwidWlkIjoxLCJleHAiOjE1MjY4NzY0ODB9.1Sktlci5GHrduSfXCTKU_LlGfFz3-pO_det2Pz3udN0',
-            'X-CorrelationId':'CCA-BACKOFFICE',
-            'X-AppId' : 'CCA-REGIS',
-            'Content-Type' : 'application/json'
+  sendEmail() {
+    const api_key = "4d2dadd776d98dfbf4329831f2a68c49eddbd707"
+    const SparkPost = require('sparkpost');
+    const client = new SparkPost(api_key);
+
+    client.transmissions.send({
+        options: {
+          sandbox: true
         },
-        // body: JSON.stringify(state.to_email)
-        body: '{"personaId": "64ca34fd-1c94-4149-a2d6-e25fe5e7c56e", "customerId": "user:736e5876-91cc-4f45-b373-1594f2ce73e5", "type": "CHAT", "channel": "MOBILE APPLICATION" }'
+        content: {
+          from: 'testing123@sparkpostbox.com',
+          subject: 'Hello, World!',
+          html:'<html><body><p>Testing SparkPost - the world\'s most awesomest email service!</p></body></html>'
+        },
+        recipients: [
+          {address: 'arttra_eagleb@hotmail.com'}
+        ]
+      })
+      .then(data => {
+        console.log('Woohoo! You just sent your first mailing!');
+        console.log(data);
+      })
+      .catch(err => {
+        console.log('Whoops! Something went wrong');
+        console.log(err);
+      });
+  }
+
+  callApi(state) {
+    // this.sendEmail()
+
+    let uri = "https://api.sparkpost.com/api/v1/transmissions"
+    var bodyData = {
+      options : { "sandbox": true },
+      content : {
+        from: "thanyavuth@sparkpostbox.com",
+        subject: "Test",
+        text: "123 Sword of Omens, give me sight BEYOND sight"
+      },
+      recipients : [{ "address": "arttra_eagleb@hotmail.com" }],
     }
 
+    var fetchData = {
+      method: 'POST',
+      headers: {
+        "Authorization": "4d2dadd776d98dfbf4329831f2a68c49eddbd707",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(bodyData)
+    }
+   
     fetch(uri, fetchData)
-    .then(function(response) {
-      return response.json();
-    })
-    .then(function(myJson) {
-      console.log(myJson);
-      alert(myJson.data.customerRequestId)
-    })
-    .catch(e => alert(e))
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function(myJson) {
+        console.log(myJson);
+        alert(myJson.data.customerRequestId)
+      })
+      .catch(e => alert(e))
   }
 
   render() {
