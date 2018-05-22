@@ -60,7 +60,7 @@ class EmailForm extends React.Component {
     event.preventDefault();
   }
 
-  sendEmail() {
+  sendEmail(state) {
     const api_key = "4d2dadd776d98dfbf4329831f2a68c49eddbd707"
     const SparkPost = require('sparkpost');
     const client = new SparkPost(api_key);
@@ -70,16 +70,52 @@ class EmailForm extends React.Component {
           sandbox: true
         },
         content: {
-          from: 'testing123@sparkpostbox.com',
-          subject: 'Hello, World!',
-          html:'<html><body><p>Testing SparkPost - the world\'s most awesomest email service!</p></body></html>'
+          from: state.from_email,
+          subject: state.subject,
+          html:'<html><body><p>' + state.text + '</body></html>'
         },
         recipients: [
-          {address: 'arttra_eagleb@hotmail.com'}
+          {address: state.to_email}
         ]
       })
       .then(data => {
-        console.log('Woohoo! You just sent your first mailing!');
+        console.log('Woohoo! email sent');
+        console.log(data);
+      })
+      .catch(err => {
+        console.log('Whoops! Something went wrong');
+        console.log(err);
+      });
+  }
+
+  fetchMailApi(state) {
+    const api_key = "4d2dadd776d98dfbf4329831f2a68c49eddbd707"
+    var uri = "https://api.sparkpost.com/api/v1/transmissions"
+    var bodyData = {
+      options : { "sandbox": true },
+      content : {
+        from: state.from_email,
+        subject: state.subject,
+        text: state.text
+      },
+      recipients : [{ "address": state.to_email }],
+    }
+
+    var fetchData = {
+      method: 'POST',
+      headers: {
+        "Authorization": api_key,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(bodyData)
+    }
+   
+    fetch(uri, fetchData)
+      .then(response => {
+        return response.json();
+      })
+      .then(data => {
+        console.log('Woohoo! email sent');
         console.log(data);
       })
       .catch(err => {
@@ -89,37 +125,8 @@ class EmailForm extends React.Component {
   }
 
   callApi(state) {
-    // this.sendEmail()
-
-    let uri = "https://api.sparkpost.com/api/v1/transmissions"
-    var bodyData = {
-      options : { "sandbox": true },
-      content : {
-        from: "thanyavuth@sparkpostbox.com",
-        subject: "Test",
-        text: "123 Sword of Omens, give me sight BEYOND sight"
-      },
-      recipients : [{ "address": "arttra_eagleb@hotmail.com" }],
-    }
-
-    var fetchData = {
-      method: 'POST',
-      headers: {
-        "Authorization": "4d2dadd776d98dfbf4329831f2a68c49eddbd707",
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(bodyData)
-    }
-   
-    fetch(uri, fetchData)
-      .then(function(response) {
-        return response.json();
-      })
-      .then(function(myJson) {
-        console.log(myJson);
-        alert(myJson.data.customerRequestId)
-      })
-      .catch(e => alert(e))
+    this.sendEmail(state)
+    // this.fetchMailApi(state)
   }
 
   render() {
