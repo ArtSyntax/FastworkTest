@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-class TextBox extends React.Component {
+export class TextBox extends React.Component {
   constructor(props) {
     super(props);
   }
