@@ -117,8 +117,9 @@ class EmailForm extends React.Component {
   }
 
   callApi(state) {
-    // this.sendEmail(state)
+    // TODO: change fetchMailApi to sendEmail if able to build sparkpost lib.
     this.fetchMailApi(state)
+    // this.sendEmail(state)
   }
 
   render() {
