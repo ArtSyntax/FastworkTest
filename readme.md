@@ -14,7 +14,7 @@ fastwork/
     |
     |-- mail_fe/
           |
-          |--src/
+          |-- src/
 
 ```
 
@@ -47,9 +47,9 @@ fastwork/
 ```
 
 ### DEVELOPER NOTE ###
-This my first time with React framework.
+This is my first time with React framework.
 I try to develop but I find problems.
 
 - Mail provider: I can curl to send email. But when I call api by http request or mail provider library, a response is 401 UNAUTHORIZED with Access-Control-Allow-Origin.
-- Test: I try to use shallow to render component for testing by jest but it always error at shallow function.
-- Build: I can use Sparkpost library on local run, but the library is error when I run a command, npm build.
+- Testing: I try to use shallow to render component for testing by jest but it error at shallow function.
+- Building: I can use Sparkpost library on local run, but the library is error when I run a command, npm build.
