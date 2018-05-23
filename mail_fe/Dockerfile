@@ -12,8 +12,8 @@ RUN npm i
 RUN npm run build
 
 # Set the command to start the node server.
-RUN npm start
+# RUN npm start
 
 # Tell Docker about the port we'll run on.
-EXPOSE 8000
+# EXPOSE 8000
 

@@ -3,10 +3,6 @@ import ReactDOM from 'react-dom';
 import './index.css';
 
 class TextBox extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
         <label>
@@ -18,10 +14,6 @@ class TextBox extends React.Component {
 }
 
 class TextArea extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
         <label>
@@ -60,33 +52,33 @@ class EmailForm extends React.Component {
     event.preventDefault();
   }
 
-  sendEmail(state) {
-    const api_key = "4d2dadd776d98dfbf4329831f2a68c49eddbd707"
-    const SparkPost = require('sparkpost');
-    const client = new SparkPost(api_key);
+  // sendEmail(state) {
+  //   const api_key = "4d2dadd776d98dfbf4329831f2a68c49eddbd707"
+  //   const SparkPost = require('sparkpost');
+  //   const client = new SparkPost(api_key);
 
-    client.transmissions.send({
-        options: {
-          sandbox: true
-        },
-        content: {
-          from: state.from_email,
-          subject: state.subject,
-          html:'<html><body><p>' + state.text + '</body></html>'
-        },
-        recipients: [
-          {address: state.to_email}
-        ]
-      })
-      .then(data => {
-        console.log('Woohoo! email sent');
-        console.log(data);
-      })
-      .catch(err => {
-        console.log('Whoops! Something went wrong');
-        console.log(err);
-      });
-  }
+  //   client.transmissions.send({
+  //       options: {
+  //         sandbox: true
+  //       },
+  //       content: {
+  //         from: state.from_email,
+  //         subject: state.subject,
+  //         html:'<html><body><p>' + state.text + '</body></html>'
+  //       },
+  //       recipients: [
+  //         {address: state.to_email}
+  //       ]
+  //     })
+  //     .then(data => {
+  //       console.log('Woohoo! email sent');
+  //       console.log(data);
+  //     })
+  //     .catch(err => {
+  //       console.log('Whoops! Something went wrong');
+  //       console.log(err);
+  //     });
+  // }
 
   fetchMailApi(state) {
     const api_key = "4d2dadd776d98dfbf4329831f2a68c49eddbd707"
@@ -125,8 +117,8 @@ class EmailForm extends React.Component {
   }
 
   callApi(state) {
-    this.sendEmail(state)
-    // this.fetchMailApi(state)
+    // this.sendEmail(state)
+    this.fetchMailApi(state)
   }
 
   render() {
