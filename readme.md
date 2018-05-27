@@ -7,16 +7,38 @@ Email Application
 ### What is this repository for? ###
 - website for email sending
 
+### Architecture ###
+```
+                                              _____________ 
+                                             |             |
+ ________          _____________      +--->  |  Sparkpost  |
+|        |        |             |     |      |_____________|  
+| client |  --->  | mailservice |  ---|       _____________
+|________|        |_____________|     |      |             |
+                                      +--->  |   MailGun   |
+                                             |_____________|
+
+```
+
+
 ### Project Structure ###
 
 ```
 fastwork/
     |
     |-- mail_fe/
+    |     |
+    |     |--src/
+    |     
+    |-- mail_be/
           |
-          |--src/
+          |--mail_be/
+          |--mailservice/
+          
 
 ```
+
+## Frontend ##
 
 ### Dependencies ###
 - Internal Service
@@ -29,7 +51,7 @@ fastwork/
     - docker-compose 1.8.0
 
 - External Service
-    - sparkpost 2.1.2
+    - mailservice 1.0.0
 
 ### Building instructions ###
 ```
@@ -45,6 +67,37 @@ fastwork/
 ```
  npm test
 ```
+
+
+## Backend ##
+
+### Dependencies ###
+- Internal Service
+    - python 2.7.12
+    - django 1.11.13.
+    - djangorest 3
+    - sparkpost 2.1.2
+
+- External Service
+    - sparkpost 2.1.2
+    - mailgun
+
+### Building instructions ###
+```
+TODO
+```
+
+### Running instructions ###
+```
+ source env/bin/activate
+ python manage.py runserver
+```
+
+### Testing instructions ###
+```
+ TODO
+```
+
 
 ### DEVELOPER NOTE ###
 This my first time with React framework.
