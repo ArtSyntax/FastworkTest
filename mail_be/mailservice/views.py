@@ -7,6 +7,7 @@ from mailservice.models import *
 from mailservice.serializers import MailSerializer
 from mailservice.services import MailServiceMixin
 
+
 class MailList(generics.ListCreateAPIView, MailServiceMixin):
     queryset = Mail.objects.all()
     serializer_class = MailSerializer
@@ -16,10 +17,7 @@ class MailList(generics.ListCreateAPIView, MailServiceMixin):
         serializer.is_valid(raise_exception=True)
         # self.perform_create(serializer)
 
-        # success = self.sendEmailSparkpost(serializer.data)
-        success = self.sendEmailMailgun(serializer.data)
-
-        if success:
+        if self.sendEmail(serializer.data):
             headers = self.get_success_headers(serializer.data)
             return Response({"message": "Successful sent email to " + serializer.data["to_mail"]}, status=status.HTTP_200_OK, headers=headers)
         else:
