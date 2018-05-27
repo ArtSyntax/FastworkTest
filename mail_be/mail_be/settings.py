@@ -27,6 +27,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# Dependency
+
+SPARKPOST_API_KEY = '4d2dadd776d98dfbf4329831f2a68c49eddbd707'
+EMAIL_BACKEND = 'sparkpost.django.email_backend.SparkPostEmailBackend'
 
 # Application definition
 
