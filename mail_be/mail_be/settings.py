@@ -30,7 +30,9 @@ ALLOWED_HOSTS = []
 # Dependency
 
 SPARKPOST_API_KEY = '4d2dadd776d98dfbf4329831f2a68c49eddbd707'
-EMAIL_BACKEND = 'sparkpost.django.email_backend.SparkPostEmailBackend'
+SPARKPOST_EMAIL_BACKEND = 'sparkpost.django.email_backend.SparkPostEmailBackend'
+MAILGUN_API_KEY = 'key-6288e2ee7267b1b05ff5f50a47d01a33'
+MAILGUN_DOMAIN = 'sandbox90a62ea443194e6ebfb7a50e9b7d75c1.mailgun.org'
 
 # Application definition
 
