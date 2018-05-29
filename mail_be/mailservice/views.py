@@ -19,6 +19,20 @@ class MailList(generics.ListCreateAPIView, MailServiceMixin):
         self.perform_create(serializer)
         return serializer
 
+    def get_queryset(self):
+        to_mail = self.request.query_params.get('to_mail', None)
+        from_mail = self.request.query_params.get('from_mail', None)
+        subject = self.request.query_params.get('subject', None)
+
+        queryset = Mail.objects.all()
+        if to_mail is not None:
+            queryset = queryset.filter(to_mail=to_mail)
+        if from_mail is not None:
+            queryset = queryset.filter(from_mail=from_mail)
+        if subject is not None:
+            queryset = queryset.filter(subject__contains=subject)
+        return queryset
+
     def post(self, request, *args, **kwargs):
 
         # validate request data
