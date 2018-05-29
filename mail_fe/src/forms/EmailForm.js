@@ -31,7 +31,7 @@ export default class EmailForm extends React.Component {
   }
 
   sendEmail(state) {
-    var uri = "http://127.0.0.1:8000/api/v1/mail/"
+    var uri = "http://127.0.0.1:8080/api/v1/mail/"
     var bodyData = {
         from_mail : state.from_mail,
         to_mail : state.to_mail,

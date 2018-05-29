@@ -41,7 +41,7 @@ export default class SearchHistoryForm extends React.Component {
   }
 
   searchData(state) {
-    var uri = "http://127.0.0.1:8000/api/v1/mail/" + this.getQuerySet(state)
+    var uri = "http://127.0.0.1:8080/api/v1/mail/" + this.getQuerySet(state)
     var fetchData = {method: 'GET'}
    
     fetch(uri, fetchData)

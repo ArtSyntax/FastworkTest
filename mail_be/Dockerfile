@@ -7,7 +7,7 @@ COPY . /mailservice
 
 # Install dependency
 RUN apt-get -y update
-RUN apt-get install -y python python-pip postgresql-client
+RUN apt-get install -y python python-pip
 RUN pip install -r /mailservice/requirements.txt
 RUN apt-get -y update && apt-get -y autoremove
 
