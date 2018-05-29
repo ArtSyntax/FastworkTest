@@ -29,10 +29,10 @@ class MailServiceMixin(object):
             sp = SparkPost(api_key)
             sp.transmissions.send(
                 use_sandbox=True,
-                recipients=[data["to_mail"]],
-                html=data["text"],
+                recipients=[data.get("to_mail", "")],
+                html=data.get("text", ""),
                 from_email='fastworktest@sparkpostbox.com',
-                subject=data["subject"]
+                subject=data.get("subject", "")
             )
             return True
         except Exception as e:
@@ -48,9 +48,9 @@ class MailServiceMixin(object):
                 ("https://api.mailgun.net/v3/" + domain + "/messages"),
                 auth=("api", api_key),
                 data={"from": "fastworktest@" + domain,
-                      "to": [data["to_mail"]],
-                      "subject": data["subject"],
-                      "text": data["text"]})
+                      "to": [data.get("to_mail", "")],
+                      "subject": data.get("subject", ""),
+                      "text": data.get("text", "")})
             return True
         except Exception as e:
             print(e)
