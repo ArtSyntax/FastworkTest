@@ -7,7 +7,6 @@ router = routers.DefaultRouter()
 
 urlpatterns = [
     url(r'^', include(router.urls)),
-    # url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^mail/$', views.MailList.as_view()),
-    url(r'^mail/(?P<pk>[0-9]+)/$', views.MailDetail.as_view()),
+    # url(r'^mail/(?P<pk>[0-9]+)/$', views.MailDetail.as_view()),
 ]
