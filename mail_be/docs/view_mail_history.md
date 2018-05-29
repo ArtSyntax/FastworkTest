@@ -5,7 +5,7 @@ API for viewing mail history.
 ## URL
 
 | ** Method **     | GET                                                       |
-| ---------------- | :-------------------------------------------------------: |
+| ---------------- | --------------------------------------------------------- |
 | ** Structure **  | `/api/:version/mail/:query_param`                         |
 | ** Example **    | `/api/v1/mail`                                            |
 | ** Example **    | `/api/v1/mail?subject=hello&to_mail=target@hotmail.com`   |

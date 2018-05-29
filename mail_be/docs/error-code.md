@@ -5,7 +5,7 @@ A description of service error code and HTTP status code.
 ## HTTP status code
 
 | Error Code  | Meaning                                                                    |
-| ----------- | :------------------------------------------------------------------------: |
+| :---------: | -------------------------------------------------------------------------- |
 | 400         | Bad Request - Your request is invalid.                                     |
 | 401         | Unauthorized - Your token key is wrong.                                    |
 | 403         | Forbidden - Your can not use the api.                                      |
