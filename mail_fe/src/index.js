@@ -5,6 +5,7 @@ import './index.css';
 import EmailForm from './forms/EmailForm';
 import SearchHistoryForm from './forms/SearchHistoryForm';
 
+
 class App extends React.Component {
   render() {
     return (
