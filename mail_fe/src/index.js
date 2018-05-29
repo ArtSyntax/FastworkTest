@@ -21,7 +21,7 @@ class TextArea extends React.Component {
     return (
         <label>
           {this.props.name}
-          <textarea rows={5} value={this.props.text} onChange={(e) => {this.props.onChange(e, this.props.name)}} />
+          <textarea rows={15} value={this.props.text} onChange={(e) => {this.props.onChange(e, this.props.name)}} />
         </label>
     );
   }
@@ -32,10 +32,10 @@ class EmailForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      to_email: '',
+      to_mail: '',
       subject: '',
       text: '',
-      from_email: '',
+      from_mail: '',
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -57,8 +57,8 @@ class EmailForm extends React.Component {
   sendEmail(state) {
     var uri = "http://127.0.0.1:8000/api/v1/mail/"
     var bodyData = {
-        from_mail : state.from_email,
-        to_mail : state.to_email,
+        from_mail : state.from_mail,
+        to_mail : state.to_mail,
         subject : state.subject,
         text : state.text
       }
@@ -76,7 +76,10 @@ class EmailForm extends React.Component {
       })
       .then(data => {
         console.log(data.message);
-        alert(data.message);
+        if (data.message)
+          alert(data.message);
+        else
+          alert(JSON.stringify(data))
       })
       .catch(err => {
         console.log(err);
@@ -86,11 +89,77 @@ class EmailForm extends React.Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <TextBox name={'to_email'} value={this.state.to_email} onChange={(e, f) => {this.handleChange(e, f)}}/> <br/>
+        <TextBox name={'to_mail'} value={this.state.to_mail} onChange={(e, f) => {this.handleChange(e, f)}}/> <br/>
         <TextBox name={'subject'} value={this.state.subject} onChange={(e, f) => {this.handleChange(e, f)}}/> <br/>
         <TextArea name={'text'} value={this.state.text} onChange={(e, f) => {this.handleChange(e, f)}}/> <br/>
-        <TextBox name={'from_email'} value={this.state.from_email} onChange={(e, f) => {this.handleChange(e, f)}}/> <br/>
-        <input type="submit" value="Submit" />
+        <TextBox name={'from_mail'} value={this.state.from_mail} onChange={(e, f) => {this.handleChange(e, f)}}/>
+        <input type="submit" value="Send" />
+      </form>
+    );
+  }
+}
+
+class SearchHistoryForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      subject: '',
+      to_mail: '',
+      from_mail: '',
+    };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange(event, f) {
+    this.setState({
+     ...this.state,
+     [f]: event.target.value
+    });
+  }
+
+  handleSubmit(event) {
+    this.searchData(this.state)
+    event.preventDefault();
+  }
+
+  getQuerySet(state) {
+    var filter = "?"
+    if (state.subject.length > 0)
+      filter += "subject=" + state.subject + "&"
+    if (state.to_mail.length > 0)
+      filter += "to_mail=" + state.to_mail + "&"
+    if (state.from_mail.length > 0)
+      filter += "from_mail=" + state.from_mail + "&"
+    return filter
+  }
+
+  searchData(state) {
+    var uri = "http://127.0.0.1:8000/api/v1/mail/" + this.getQuerySet(state)
+    var fetchData = {method: 'GET'}
+   
+    fetch(uri, fetchData)
+      .then(response => {
+        return response.json();
+      })
+      .then(data => {
+        state.detail = data
+        console.log(data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <TextBox name={'subject'} value={this.state.subject} onChange={(e, f) => {this.handleChange(e, f)}}/>
+        <TextBox name={'to_mail'} value={this.state.to_mail} onChange={(e, f) => {this.handleChange(e, f)}}/>
+        <TextBox name={'from_mail'} value={this.state.from_mail} onChange={(e, f) => {this.handleChange(e, f)}}/>
+        <input type="submit" value="Search" /> <br/> <br/>
+        <TextArea value={this.state.detail} onChange={(e, f) => {this.handleChange(e, f)}} readonly/>
       </form>
     );
   }
@@ -101,11 +170,19 @@ class App extends React.Component {
     return (
       <div className="app">
         <div className="app-header">
+          <h1 className="app-title">Email Client</h1>
+        </div>
+      
+        <h1 className="app-intro">Email Sender</h1>
+        <div className="app-content">
           <EmailForm />
         </div>
+      
+        <hr />
+
+        <h1 className="app-intro">Email History</h1>
         <div className="app-content">
-          <div>{/* status */}</div>
-          <ol>{/* TODO */}</ol>
+          <SearchHistoryForm />
         </div>
       </div>
     );
