@@ -2,10 +2,8 @@
 
 Email Application
 
-*Remark: Nothing is finished. more detail at developer note*
-
 ### What is this repository for? ###
-- website for email sending
+- website for email sending and view history.
 
 ### Architecture ###
 ```
@@ -20,6 +18,11 @@ Email Application
 
 ```
 
+### Deployment ###
+```
+ /fastwork/mail_fe$ docker-compose up -d
+ /fastwork/mail_be$ docker-compose up -d
+```
 
 ### Project Structure ###
 
@@ -63,12 +66,12 @@ fastwork/
 
 ### Building instructions ###
 ```
- docker-compose build
+ npm run build
 ```
 
 ### Running instructions ###
 ```
- docker run
+ npm start
 ```
 
 ### Testing instructions ###
@@ -76,6 +79,17 @@ fastwork/
  npm test
 ```
 
+### Deployment instructions ###
+Option 1
+```
+ docker-compose up
+```
+
+Option 2
+```
+ docker-compose build
+ docker run -d -p 3000:3000 --name mailfe mailfe_app
+```
 
 ## Backend ##
 
@@ -106,10 +120,14 @@ TODO
  python manage.py test
 ```
 
-
 ### DEVELOPER NOTE ###
 I try to develop but I find problems.
 
 - Mail provider: A mail is sent by Sparkpost is usually limited. A mail is sent by Mailgun is success but it always drop. Mailgun told me to contact Internet service provider since part of their network is on our block list. User can input sender's email but it will change to provider mail at the backend service. Because it is free mail provider plan.
-
 - React Testing: I try to use shallow to render component for testing by jest but it error at shallow function.
+
+### Future Feature ###
+- Using environment variable and config file instead of hard code
+- Implement API Gateway
+- Implement Authentication
+- Fix unit test
