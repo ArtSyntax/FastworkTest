@@ -28,12 +28,20 @@ fastwork/
     |
     |-- mail_fe/
     |     |
-    |     |--src/
+    |     |-- src/
+    |     |     |-- components/
+    |     |     |-- forms/
+    |     |     |-- index.js
+    |     |     |-- index.css
+    |     |
+    |     |-- test/
+    |           |-- components/
+    |           |-- forms/
     |     
     |-- mail_be/
           |
-          |--mail_be/
-          |--mailservice/
+          |-- mail_be/
+          |-- mailservice/
           
 
 ```
@@ -76,8 +84,8 @@ fastwork/
     - python 2.7.12
     - django 1.11.13.
     - djangorest 3
+    - django-cors-headers
     - sparkpost 2.1.2
-
 - External Service
     - sparkpost 2.1.2
     - mailgun
@@ -95,14 +103,13 @@ TODO
 
 ### Testing instructions ###
 ```
- TODO
+ python manage.py test
 ```
 
 
 ### DEVELOPER NOTE ###
-This is my first time with React framework.
 I try to develop but I find problems.
 
-- Mail provider: I can curl to send email. But when I call api by http request or mail provider library, a response is 401 UNAUTHORIZED with Access-Control-Allow-Origin.
-- Testing: I try to use shallow to render component for testing by jest but it error at shallow function.
-- Building: I can use Sparkpost library on local run, but the library is error when I run a command, npm build.
+- Mail provider: A mail is sent by Sparkpost is usually limited. A mail is sent by Mailgun is success but it always drop. Mailgun told me to contact Internet service provider since part of their network is on our block list. User can input sender's email but it will change to provider mail at the backend service. Because it is free mail provider plan.
+
+- React Testing: I try to use shallow to render component for testing by jest but it error at shallow function.
