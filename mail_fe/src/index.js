@@ -50,79 +50,37 @@ class EmailForm extends React.Component {
   }
 
   handleSubmit(event) {
-    // alert('An essay was submitted: ' + this.state.to_email + ' ' + this.state.subject+ ' ' +this.state.text+ ' ' +this.state.from_email);
-    this.callApi(this.state)
+    this.sendEmail(this.state)
     event.preventDefault();
   }
 
-  // sendEmail(state) {
-  //   const api_key = "4d2dadd776d98dfbf4329831f2a68c49eddbd707"
-  //   const SparkPost = require('sparkpost');
-  //   const client = new SparkPost(api_key);
-
-  //   client.transmissions.send({
-  //       options: {
-  //         sandbox: true
-  //       },
-  //       content: {
-  //         from: state.from_email,
-  //         subject: state.subject,
-  //         html:'<html><body><p>' + state.text + '</body></html>'
-  //       },
-  //       recipients: [
-  //         {address: state.to_email}
-  //       ]
-  //     })
-  //     .then(data => {
-  //       console.log('Woohoo! email sent');
-  //       console.log(data);
-  //     })
-  //     .catch(err => {
-  //       console.log('Whoops! Something went wrong');
-  //       console.log(err);
-  //     });
-  // }
-
-  fetchMailApi(state) {
-    const api_key = "4d2dadd776d98dfbf4329831f2a68c49eddbd707"
-    var uri = "https://api.sparkpost.com/api/v1/transmissions"
+  sendEmail(state) {
+    var uri = "http://127.0.0.1:8000/api/v1/mail/"
     var bodyData = {
-      options : { "sandbox": true },
-      content : {
-        from: state.from_email,
-        subject: state.subject,
-        text: state.text
-      },
-      recipients : [{ "address": state.to_email }],
-    }
-
+        from_mail : state.from_email,
+        to_mail : state.to_email,
+        subject : state.subject,
+        text : state.text
+      }
     var fetchData = {
-      method: 'POST',
-      headers: {
-        "Authorization": api_key,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(bodyData)
-    }
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(bodyData)
+      }
    
     fetch(uri, fetchData)
       .then(response => {
         return response.json();
       })
       .then(data => {
-        console.log('Woohoo! email sent');
-        console.log(data);
+        console.log(data.message);
+        alert(data.message);
       })
       .catch(err => {
-        console.log('Whoops! Something went wrong');
         console.log(err);
       });
-  }
-
-  callApi(state) {
-    // TODO: change fetchMailApi to sendEmail if able to build sparkpost lib.
-    this.fetchMailApi(state)
-    // this.sendEmail(state)
   }
 
   render() {
