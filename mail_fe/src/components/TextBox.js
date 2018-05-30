@@ -9,7 +9,7 @@ export default class TextBox extends React.Component {
             {this.props.name}
           </div>  
           <div className="input"> 
-            <input type="text" value={this.props.value} onChange={(e) => {this.props.onChange(e, this.props.name)}} />
+            <input type={this.props.type} value={this.props.value} onChange={(e) => {this.props.onChange(e, this.props.name)}} required={this.props.required} readOnly={this.props.readOnly} />
           </div>  
         </div>
     );

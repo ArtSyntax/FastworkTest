@@ -63,14 +63,16 @@ export default class SearchHistoryForm extends React.Component {
         return response.json();
       })
       .then(data => {
-        // debugger
-        var result = data.map(x => 
-            "Date: " + x.timestamp + 
-            "\tSub: " + x.subject + "\n" +
-            "To: "+ x.to_mail + 
-            "\tFrom: "+ x.from_mail + 
-            "\tSend: " + x.status.replace("S", "Success").replace("F", "Fail")
-          ).join("\n\n")
+        if (data.length > 0)
+          var result = data.map(x => 
+              "Date: " + x.timestamp + 
+              "\tSub: " + x.subject + "\n" +
+              "To: "+ x.to_mail + 
+              "\tFrom: "+ x.from_mail + 
+              "\tSend: " + x.status
+            ).join("\n\n")
+        else
+          var result = "Not found."
         this.setState({
           detail: result
         })
@@ -85,11 +87,11 @@ export default class SearchHistoryForm extends React.Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit} className="searchHistoryForm">
-        <TextBox name={'subject'} value={this.state.subject} onChange={(e, f) => {this.handleChange(e, f)}}/>
-        <TextBox name={'to_mail'} value={this.state.to_mail} onChange={(e, f) => {this.handleChange(e, f)}}/>
-        <TextBox name={'from_mail'} value={this.state.from_mail} onChange={(e, f) => {this.handleChange(e, f)}}/>
+        <TextBox type={'text'} name={'subject'} value={this.state.subject} required={false} readOnly={false} onChange={(e, f) => {this.handleChange(e, f)}}/>
+        <TextBox type={'email'} name={'to_mail'} value={this.state.to_mail} required={false} readOnly={false} onChange={(e, f) => {this.handleChange(e, f)}}/>
+        <TextBox type={'email'} name={'from_mail'} value={this.state.from_mail} required={false} readOnly={false} onChange={(e, f) => {this.handleChange(e, f)}}/>
         <Button type={'submit'} value={'Search'}/>
-        <TextArea rows={15} value={this.state.detail} onChange={(e, f) => {this.handleChange(e, f)}} readonly/>
+        <TextArea rows={15} value={this.state.detail} required={false} readOnly={true} onChange={(e, f) => {this.handleChange(e, f)}}/>
       </form>
     );
   }

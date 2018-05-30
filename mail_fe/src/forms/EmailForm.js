@@ -77,10 +77,10 @@ export default class EmailForm extends React.Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit} className="emailForm">
-        <TextBox name={'to_mail'} value={this.state.to_mail} onChange={(e, f) => {this.handleChange(e, f)}}/>
-        <TextBox name={'subject'} value={this.state.subject} onChange={(e, f) => {this.handleChange(e, f)}}/>
-        <TextArea rows={10} name={'text'} value={this.state.text} onChange={(e, f) => {this.handleChange(e, f)}}/>
-        <TextBox name={'from_mail'} value={this.state.from_mail} onChange={(e, f) => {this.handleChange(e, f)}}/>
+        <TextBox type={'email'} name={'to_mail'} value={this.state.to_mail} required={true} readOnly={false} onChange={(e, f) => {this.handleChange(e, f)}}/>
+        <TextBox type={'text'} name={'subject'} value={this.state.subject} required={false} readOnly={false} onChange={(e, f) => {this.handleChange(e, f)}}/>
+        <TextArea rows={10} name={'text'} value={this.state.text} required={false} readOnly={false} onChange={(e, f) => {this.handleChange(e, f)}}/>
+        <TextBox type={'email'} name={'from_mail'} value={this.state.from_mail} required={true} readOnly={false} onChange={(e, f) => {this.handleChange(e, f)}}/>
         <br />
         <Button type={'submit'} value={'Send'}/>
 
