@@ -2,6 +2,7 @@ import React from 'react';
 
 import TextBox from '../components/TextBox';
 import TextArea from '../components/TextArea';
+import Button from '../components/Button';
 
 
 export default class SearchHistoryForm extends React.Component {
@@ -72,12 +73,12 @@ export default class SearchHistoryForm extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit} className="searchForm">
+      <form onSubmit={this.handleSubmit} className="searchHistoryForm">
         <TextBox name={'subject'} value={this.state.subject} onChange={(e, f) => {this.handleChange(e, f)}}/>
         <TextBox name={'to_mail'} value={this.state.to_mail} onChange={(e, f) => {this.handleChange(e, f)}}/>
         <TextBox name={'from_mail'} value={this.state.from_mail} onChange={(e, f) => {this.handleChange(e, f)}}/>
-        <input type="submit" value="Search" /> <br/> <br/>
-        <TextArea value={this.state.detail} onChange={(e, f) => {this.handleChange(e, f)}} readonly/>
+        <Button type={'submit'} value={'Search'}/>
+        <TextArea rows={15} value={this.state.detail} onChange={(e, f) => {this.handleChange(e, f)}} readonly/>
       </form>
     );
   }

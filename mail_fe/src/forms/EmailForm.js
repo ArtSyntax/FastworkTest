@@ -2,6 +2,7 @@ import React from 'react';
 
 import TextBox from '../components/TextBox';
 import TextArea from '../components/TextArea';
+import Button from '../components/Button';
 
 
 export default class EmailForm extends React.Component {
@@ -64,12 +65,14 @@ export default class EmailForm extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <TextBox name={'to_mail'} value={this.state.to_mail} onChange={(e, f) => {this.handleChange(e, f)}}/> <br/>
-        <TextBox name={'subject'} value={this.state.subject} onChange={(e, f) => {this.handleChange(e, f)}}/> <br/>
-        <TextArea name={'text'} value={this.state.text} onChange={(e, f) => {this.handleChange(e, f)}}/> <br/>
+      <form onSubmit={this.handleSubmit} className="emailForm">
+        <TextBox name={'to_mail'} value={this.state.to_mail} onChange={(e, f) => {this.handleChange(e, f)}}/>
+        <TextBox name={'subject'} value={this.state.subject} onChange={(e, f) => {this.handleChange(e, f)}}/>
+        <TextArea rows={10} name={'text'} value={this.state.text} onChange={(e, f) => {this.handleChange(e, f)}}/>
         <TextBox name={'from_mail'} value={this.state.from_mail} onChange={(e, f) => {this.handleChange(e, f)}}/>
-        <input type="submit" value="Send" />
+        <br />
+        <Button type={'submit'} value={'Send'}/>
+
       </form>
     );
   }

@@ -1,9 +1,17 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  background-color: #e3f2fd;
+}
+
 .app {
-  /*text-align: center;*/
+  height: 100%;
 }
 
 .app-header {
-  background-color: #1976d2;
+  text-align: center;
+  background-color: #0288d1;
   height: 50px;
   padding: 20px;
   color: white;
@@ -15,46 +23,62 @@
 
 .app-intro {
   font-size: large;
+  color: #004ba0;
+  padding-left: 20px;
 }
 
 .app-content {
   width: 100%;
+  padding-left: 200px;
 }
-
-/*@keyframes app-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}*/
 
 .title {
   text-align: right;
   width: 100px;
-  display: inline-block;
   padding: 5px;
+  display: inline-block;
 }
 .input {
   padding: 5px;
-  width: 300px;
+  width: 840px;
   display: inline-block;
 }
 
-.input input{
-  width: 100%;
-}
-.input textarea{
+.input input {
   width: 100%;
 }
 
-.searchForm .title{
-  width: 50px;
+.input textarea {
+  width: 100%;
 }
-.searchForm .mytextbox{
-  width: 400px;
+
+.emailForm .button {
+  padding-left: 115px;
+}
+
+.searchHistoryForm .button {
+  padding-left: 50px;
   display: inline-block;
 }
 
-body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+.searchHistoryForm .textbox {
+  display: inline-block;
 }
+
+.searchHistoryForm .textbox .title {
+  width: 100px;
+  display: inline-block;
+}
+
+.searchHistoryForm .textbox .input {
+  width: 200px;
+  padding: 5px;
+  display: inline-block;
+}
+
+.searchHistoryForm .textarea .input {
+  width: 840px;
+  padding: 5px;
+  display: inline-block;
+}
+
