@@ -34,7 +34,9 @@ Option 2: multiple server deployment (seperated frontend and backend server)
  /fastwork/mail_fe$ docker-compose up -d
  /fastwork/mail_be$ docker-compose up -d
 ```
-open application [http://localhost:8000](http://localhost:8000) in the browser
+- application [http://localhost:8000](http://localhost:8000)
+- service [http://localhost:8080](http://localhost:8080)
+- admin [http://localhost:8080/admin](http://localhost:8080/admin)
 
 ### Project Structure ###
 
