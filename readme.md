@@ -37,6 +37,7 @@ Option 2: multiple server deployment (seperated frontend and backend server)
 - application [http://localhost:8000](http://localhost:8000)
 - service [http://localhost:8080](http://localhost:8080)
 - admin [http://localhost:8080/admin](http://localhost:8080/admin)
+  user: admin pass: password123
 
 ### Project Structure ###
 
