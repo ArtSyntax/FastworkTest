@@ -70,6 +70,7 @@ export default class EmailForm extends React.Component {
           alert(JSON.stringify(data))
       })
       .catch(err => {
+        alert("Service error.")
         console.log(err);
       });
   }
