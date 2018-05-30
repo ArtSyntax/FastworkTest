@@ -4,10 +4,14 @@ import React from 'react';
 export default class TextArea extends React.Component {
   render() {
     return (
-        <label>
-          {this.props.name}
-          <textarea rows={15} value={this.props.text} onChange={(e) => {this.props.onChange(e, this.props.name)}} />
-        </label>
+    	<div>	
+	    	<div className="title">	
+	          	<label>{this.props.name}</label>
+	    	</div>	
+	    	<div className="input">	
+	          <textarea rows={7} value={this.props.value} onChange={(e) => {this.props.onChange(e, this.props.name)}} />
+	        </div>
+        </div>
     );
   }
 }

@@ -40,16 +40,29 @@ export default class SearchHistoryForm extends React.Component {
     return filter
   }
 
+  clearInput() {
+    this.setState({
+      subject: '',
+      to_mail: '',
+      from_mail: '',
+      detail: ''
+    })
+  }
+
   searchData(state) {
     var uri = "http://127.0.0.1:8080/api/v1/mail/" + this.getQuerySet(state)
     var fetchData = {method: 'GET'}
+
+    this.clearInput()
    
     fetch(uri, fetchData)
       .then(response => {
         return response.json();
       })
       .then(data => {
-        state.detail = data
+        this.setState({
+          detail: JSON.stringify(data)
+        })
         console.log(data);
       })
       .catch(err => {
@@ -59,7 +72,7 @@ export default class SearchHistoryForm extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit} className="searchForm">
         <TextBox name={'subject'} value={this.state.subject} onChange={(e, f) => {this.handleChange(e, f)}}/>
         <TextBox name={'to_mail'} value={this.state.to_mail} onChange={(e, f) => {this.handleChange(e, f)}}/>
         <TextBox name={'from_mail'} value={this.state.from_mail} onChange={(e, f) => {this.handleChange(e, f)}}/>
