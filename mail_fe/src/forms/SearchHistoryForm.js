@@ -12,6 +12,7 @@ export default class SearchHistoryForm extends React.Component {
       subject: '',
       to_mail: '',
       from_mail: '',
+      detail: ''
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -46,24 +47,34 @@ export default class SearchHistoryForm extends React.Component {
       subject: '',
       to_mail: '',
       from_mail: '',
-      detail: ''
     })
   }
 
   searchData(state) {
     var uri = "http://127.0.0.1:8080/api/v1/mail/" + this.getQuerySet(state)
     var fetchData = {method: 'GET'}
+    
+    this.setState({
+      detail: ''
+    })
 
-    this.clearInput()
-   
     fetch(uri, fetchData)
       .then(response => {
         return response.json();
       })
       .then(data => {
+        // debugger
+        var result = data.map(x => 
+            "Date: " + x.timestamp + 
+            "\tSub: " + x.subject + "\n" +
+            "To: "+ x.to_mail + 
+            "\tFrom: "+ x.from_mail + 
+            "\tSend: " + x.status.replace("S", "Success").replace("F", "Fail")
+          ).join("\n\n")
         this.setState({
-          detail: JSON.stringify(data)
+          detail: result
         })
+        this.clearInput()
         console.log(data);
       })
       .catch(err => {

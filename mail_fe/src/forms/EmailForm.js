@@ -31,6 +31,15 @@ export default class EmailForm extends React.Component {
     event.preventDefault();
   }
 
+  clearInput() {
+    this.setState({
+      subject: '',
+      to_mail: '',
+      from_mail: '',
+      detail: ''
+    })
+  }
+
   sendEmail(state) {
     var uri = "http://127.0.0.1:8080/api/v1/mail/"
     var bodyData = {
@@ -53,8 +62,10 @@ export default class EmailForm extends React.Component {
       })
       .then(data => {
         console.log(data.message);
-        if (data.message)
+        if (data.message){
+          this.clearInput;
           alert(data.message);
+        }
         else
           alert(JSON.stringify(data))
       })
