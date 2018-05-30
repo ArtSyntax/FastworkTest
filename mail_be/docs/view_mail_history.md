@@ -14,22 +14,20 @@ API for viewing mail history.
 ```json
 [
     {
-        "id": 1,
         "to_mail": "target@hotmail.com",
         "from_mail": "fastworktest@gmail.com",
         "subject": "hi5",
         "text": "hahahaha",
-        "status": "S",
-        "timestamp": "2018-05-29T14:09:51.456301Z"
+        "status": "Success",
+        "timestamp": "29 May 2018 - 11:19"
     },
     {
-        "id": 2,
         "to_mail": "target@hotmail.com",
         "from_mail": "fastworktest@gmail.com",
         "subject": "hi again",
         "text": "hello and goodbye",
-        "status": "F",
-        "timestamp": "2018-05-29T19:11:02.363653Z"
+        "status": "Fail",
+        "timestamp": "29 May 2018 - 11:23"
     }
 ]
 ```
