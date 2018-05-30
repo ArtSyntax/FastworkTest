@@ -1,18 +1,18 @@
 version: "2"
 
 services:
-  mailclient:
+  mail_client:
     build:
       context: ./mail_fe
     ports:
       - "8000:3000"
     volumes:
-      - .:/usr/src/app
+      - ./mail_fe:/usr/src/app
 
-  mailservice:
+  mail_service:
     build:
       context: ./mail_be
     ports:
       - "8080:8000"
     volumes:
-      - .:/mailservice
+      - ./mail_be:/mailservice

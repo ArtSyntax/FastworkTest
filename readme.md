@@ -23,6 +23,13 @@ Email Application
 ```
 
 ### Deployment ###
+
+Option 1: single server deployment
+```
+ /fastwork$ docker-compose up -d
+```
+
+Option 2: multiple server deployment (seperated frontend and backend server)
 ```
  /fastwork/mail_fe$ docker-compose up -d
  /fastwork/mail_be$ docker-compose up -d
