@@ -15,3 +15,6 @@ class Mail(models.Model):
     status = models.CharField(max_length=1, choices=STATUS, default='F')
     timestamp = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return self.subject
+
